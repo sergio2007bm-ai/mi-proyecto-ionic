@@ -1,12 +1,33 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UsersService } from '../services/users.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  standalone: true,
+  imports: [CommonModule]
 })
-export class HomePage {
-  constructor() {}
+export class HomePage implements OnInit {
+  users: User[] = [];
+  loading = false;
+
+  constructor(private usersService: UsersService) {}
+
+  async ngOnInit() {
+    await this.loadUsers();
+  }
+
+  async loadUsers() {
+    try {
+      this.loading = true;
+      this.users = await this.usersService.getActiveUsers();
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      this.loading = false;
+    }
+  }
 }

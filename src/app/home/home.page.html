@@ -1,20 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+<div style="padding: 20px; font-family: sans-serif;">
+  <h2 style="color: #3880ff; border-bottom: 2px solid #3880ff; padding-bottom: 10px;">Usuarios Activos</h2>
+  
+  <div *ngIf="loading" style="color: #666;">Cargando usuarios...</div>
+  
+  <ul *ngIf="!loading" style="list-style: none; padding: 0;">
+    <li *ngFor="let user of users" style="padding: 15px; margin-bottom: 10px; background: #f4f5f8; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <strong style="font-size: 1.1em; color: #222;">{{ user.name }}</strong>
+      <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">{{ user.email }}</p>
+    </li>
+  </ul>
+</div>
